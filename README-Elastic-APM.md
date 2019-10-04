@@ -22,6 +22,10 @@ To instrument the application for Elastic APM (https://elastic.co/products/apm )
     Query OK, 0 rows affected (0.00 sec)
     ```
  - Follow the instructions in Kibana Home (stylized **K** in upper left corner) -> Add Data -> APM -> Java
+
+    **Note**: You can use curl to download the APM agent jar:
+    `curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.10.0/elastic-apm-agent-1.10.0.jar`
+
  - Copy your APM Server URL and token from the cloud console
 
     **Note**: The details below are for a Spring app using Maven and mwnc
