@@ -34,3 +34,18 @@ To instrument the application for Elastic APM (https://elastic.co/products/apm )
  - make sure that the MySQL password for user springboot and the value in `complete/src/main/resources/application.properties` match
  - run ./mvnw spring-boot:run
  - Open Kibana and then the APM application in the left nav bar
+
+## Setup on Ubuntu
+```
+sudo apt install default-jre
+sudo apt install default-jdk
+sudo apt install maven
+sudo apt install git
+git clone https://github.com/DanRoscigno/gs-accessing-data-mysql.git
+cd gs-accessing-data-mysql/
+cd complete/
+vi environment 
+source ./environment 
+curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.10.0/elastic-apm-agent-1.10.0.jar
+./mvnw spring-boot:run
+```
