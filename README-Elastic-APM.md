@@ -27,5 +27,6 @@ To instrument the application for Elastic APM (https://elastic.co/products/apm )
     **Note**: The details below are for a Spring app using Maven and mwnc
  - edit the environment file /complete/environment and set the values
  - source the environment file
+ - make sure that the MySQL password for user springboot and the value in `complete/src/main/resources/application.properties` match
  - run ./mvnw spring-boot:run
  - Open Kibana and then the APM application in the left nav bar
