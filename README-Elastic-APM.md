@@ -33,6 +33,10 @@ To instrument the application for Elastic APM (https://elastic.co/products/apm )
  - source the environment file
  - make sure that the MySQL password for user springboot and the value in `complete/src/main/resources/application.properties` match
  - run ./mvnw spring-boot:run
+ - In another shell add a record:
+    ```
+    curl localhost:8080/demo/add -d name=First -d esomeemail@someemailprovider.com
+    ```
  - Open Kibana and then the APM application in the left nav bar
 
 ## Setup on Ubuntu
