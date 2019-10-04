@@ -2,4 +2,6 @@ export ELASTIC_APM_SERVER_URL=<APM Server URL here>
 
 export ELASTIC_APM_SECRET_TOKEN=<APM Server token here>
 
+export ELASTIC_APM_SERVICE_NAME=<the name of your app>
+
 
