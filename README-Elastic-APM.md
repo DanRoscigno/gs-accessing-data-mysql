@@ -8,8 +8,9 @@ To instrument the application for Elastic APM (https://elastic.co/products/apm )
  - Clone this fork
  - Deploy the Elastic Stack using Elasticsearch Service in Elastic Cloud, or follow the instructions at https://elastic.co/start
  - Follow the instructions in Kibana Home (stylized **K** in upper left corner) -> Add Data -> APM -> Java
-    **Note**: The details below are for a Spring app using Maven and mwnc
  - Copy your APM Server URL and token from the cloud console
+
+    **Note**: The details below are for a Spring app using Maven and mwnc
  - edit the environment file /complete/environment and set the values
  - source the environment file
  - run ./mvnw spring-boot:run
