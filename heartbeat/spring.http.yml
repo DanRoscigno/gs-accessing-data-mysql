@@ -1,0 +1,22 @@
+- type: http
+  #
+  # Replaces:
+  # curl localhost:8080/demo/add -d name=First \
+  # -d email=someemail@someemailprovider.com
+  #
+  # Adds: Checking response body for 'Saved'
+  #
+
+  schedule: '@every 5s'
+  urls: ["http://localhost:8080/demo/add"]
+  check.request:
+    method: POST
+    headers: 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    body: "name=first&email=someemail%40someemailprovider.com"
+  check.response:
+    status: 200
+    body:
+      - Saved
+      - saved
+  response.include_body: 'always'
