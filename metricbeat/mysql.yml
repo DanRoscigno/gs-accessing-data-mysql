@@ -1,0 +1,16 @@
+# Module: mysql
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.3/metricbeat-module-mysql.html
+- module: mysql
+  period: 10s
+  hosts: ["root:${MYSQL_PASS}@tcp(127.0.0.1:3306)/"]
+
+  # Note: If you specify the username / pass in the hosts list
+  # then you should remove the separate username and password
+  # lines to avoid confusion.
+
+  # The hosts line above uses ${MYSQL_PASS} in place of the
+  # MySQL password.  The password is stored in the Metricbeat
+  # keystore like so:
+  #
+  #     sudo metricbeat keystore create
+  #     sudo metricbeat keystore add MYSQL_PASS
