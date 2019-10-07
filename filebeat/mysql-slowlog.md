@@ -1,5 +1,11 @@
+## Enable the slowlog
 
-root@roscigno-mysql-vm:/etc/mysql# mysql -u root -p
+The default `long_query_log` time is anything over 1 second.  Below the time is set to one tenth 
+of a second to drive some output for testing.  I would not recommend 0.1 as the `long_query_time`
+in production.
+
+```
+# mysql -u root -p
 Enter password: 
 mysql> SET GLOBAL slow_query_log = 'ON';
 Query OK, 0 rows affected (0.00 sec)
@@ -7,9 +13,12 @@ mysql> SET GLOBAL long_query_time = 0.1;
 Query OK, 0 rows affected (0.00 sec)
 mysql> exit
 Bye
+```
 
+## Force a slow query bye sleeping for 2 seconds
 
-root@roscigno-mysql-vm:/etc/mysql# mysql -u root -p
+```
+# mysql -u root -p
 Enter password: 
 mysql> SELECT SLEEP(2);
 +----------+
@@ -20,10 +29,15 @@ mysql> SELECT SLEEP(2);
 1 row in set (2.00 sec)
 mysql> exit
 Bye
+```
 
+## Check the log
 
-root@roscigno-mysql-vm:/var/lib/mysql# cat /var/lib/mysql/roscigno-mysql-vm-sl
-ow.log 
+The default location is `/var/lib/mysql/<hostname>-slow.log`
+
+```
+# cat /var/lib/mysql/roscigno-mysql-vm-slow.log 
+
 /usr/sbin/mysqld, Version: 5.7.27 (MySQL Community Server (GPL)
 ). started with:
 Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
@@ -34,3 +48,8 @@ Time                 Id Command    Argument
 examined: 0
 SET timestamp=1570478956;
 SELECT SLEEP(2);
+```
+
+## Check the dashboard
+
+![MySQL Dashboard](https://raw.githubusercontent.com/DanRoscigno/gs-accessing-data-mysql/master/filebeat/mysql-slow.png)
