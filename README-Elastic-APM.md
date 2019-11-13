@@ -6,6 +6,10 @@ https://spring.io/guides/gs/accessing-data-mysql/
 To instrument the application for Elastic APM (https://elastic.co/products/apm ) you can follow these steps:
 
  - Clone this fork
+ ```
+ git clone https://github.com/DanRoscigno/gs-accessing-data-mysql.git
+ ```
+ 
  - Deploy the Elastic Stack using Elasticsearch Service in Elastic Cloud, or follow the instructions at https://elastic.co/start
  - install MySQL
  - Create a DB and user 
