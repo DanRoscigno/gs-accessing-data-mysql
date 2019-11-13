@@ -13,9 +13,7 @@ sudo curl -L -O https://raw.githubusercontent.com/DanRoscigno/gs-accessing-data-
 ```
 ## Configure Heartbeat
 
-### Keystore
-
-## Metricbeat Keystore
+## Heartbeat Keystore
 ```
 sudo heartbeat keystore create
 
@@ -34,6 +32,14 @@ sudo heartbeat keystore add ES_USER
 sudo heartbeat keystore add ES_USER_PASSWORD
 
 # Another example password C@tf00d
+```
+
+### Heartbeat config file
+Set the Cloud ID and Auth
+```
+cloud.id: "Observability:YourReallyLongCloudID"
+
+cloud.auth: "${ES_USER}:${ES_USER_PASSWORD}"
 ```
 
 ## Run Heartbeat setup
