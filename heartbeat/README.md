@@ -6,14 +6,14 @@ sudo dpkg -i heartbeat-7.4.2-amd64.deb
 
 ## Configure Heartbeat to monitor the Spring app
 
-Place the file spring-http.yml in /etc/heartbeat/......
+Place the file `spring-http.yml` in `/etc/heartbeat/monitors.d`
 ```
 cd /etc/heartbeat/monitors.d/
 sudo curl -L -O https://raw.githubusercontent.com/DanRoscigno/gs-accessing-data-mysql/master/heartbeat/spring.http.yml
 ```
 ## Configure Heartbeat
 
-## Heartbeat Keystore
+### Heartbeat Keystore
 ```
 sudo heartbeat keystore create
 
@@ -35,6 +35,8 @@ sudo heartbeat keystore add ES_USER_PASSWORD
 ```
 
 ### Heartbeat config file
+Use the username and password keys from the keystore in the configuration file `/etc/heartbeat/heartbeat.yml`
+
 Set the Cloud ID and Auth
 ```
 cloud.id: "Observability:YourReallyLongCloudID"
