@@ -146,3 +146,63 @@ When deploying the sample Spring app mysql is deployed and configured.  In the s
   #hosts: ["root:secret@tcp(127.0.0.1:3306)/"]
   hosts: ["springuser:ThePassword@tcp(127.0.0.1:3306)/"]
 ```
+
+## Heartbeat
+
+### heartbeat.yml
+```
+heartbeat.config.monitors:
+  # Directory + glob pattern to search for configuration files
+  path: ${path.config}/monitors.d/*.yml
+  # If enabled, heartbeat will periodically check the config.monitors path for changes
+  reload.enabled: false
+  # How often to check for changes
+  reload.period: 5s
+
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+  #_source.enabled: false
+
+cloud.id: "Observability:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvJDY4NDI4YWUxMzUzMTRlNjJiMGRhNTZiOWEzYjRhMTBmJDU3YzU5NzM5Y2NmYjQ2ZTRiNWNjMjY2MjIyNzcwYjZj"
+
+cloud.auth: "${ES_USER}:${ES_USER_PASSWORD}"
+
+processors:
+  - add_observer_metadata:
+
+logging.level: error
+
+monitoring.enabled: true
+```
+
+#### /etc/heartbeat/monitors.d/spring.http.yml
+
+The following configuration specifies that every 5 seconds the `add` endpoint will be accessed
+and the response will be compared to the strings `Saved` and `saved`
+
+```
+- type: http
+  #
+  # Replaces:
+  # curl localhost:8080/demo/add -d name=First \
+  # -d email=someemail@someemailprovider.com
+  #
+  # Adds: Checking response body for 'Saved'
+  #
+
+  name: SpringToDoApp
+  schedule: '@every 5s'
+  urls: ["http://10.0.2.15:8080/demo/add"]
+  check.request:
+    method: POST
+    headers: 
+      'Content-Type': 'application/x-www-form-urlencoded'
+    body: "name=dan&email=dan%40example.com"
+  check.response:
+    status: 200
+    body:
+      - Saved
+      - saved
+  response.include_body: 'always'
+  ```
