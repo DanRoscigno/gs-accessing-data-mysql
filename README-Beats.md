@@ -1,3 +1,10 @@
+## Setup roles and users for Beat setup and Beat writer
+
+For 7.0 - 7.4:
+https://github.com/elastic/csm/blob/master/FiveBestPracticesForIngest/RoleBasedAccessControl.md
+
+For 7.5 things change slightly, I am working on it.
+
 ## Three Beats will be deployed:
 
 - Filebeat
@@ -73,4 +80,69 @@ monitoring.enabled: true
 #============================= Spooling  ==================================
 
 queue.spool: ~
+```
+
+## Metricbeat
+
+### metricbeat.yml
+
+```
+setup.ilm.check_exists: false
+
+metricbeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+  # Period on which files under path should be checked for changes
+  #reload.period: 10s
+
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+  #_source.enabled: false
+
+
+cloud.id: "Observability:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvJDY4NDI4YWUxMzUzMTRlNjJiMGRhNTZiOWEzYjRhMTBmJDU3YzU5NzM5Y2NmYjQ2ZTRiNWNjMjY2MjIyNzcwYjZj"
+
+cloud.auth: "${ES_USER}:${ES_USER_PASSWORD}"
+
+
+processors:
+  #- add_host_metadata: ~
+  - add_host_metadata:
+      netinfo.enabled: true
+      cache.ttl: 5m
+  - add_cloud_metadata: ~
+  - add_fields:
+      target: ''
+      fields:
+        service.name: 'Online Banking'
+        service.id: 'ob-canada'
+
+logging.level: error
+
+monitoring.enabled: true
+
+queue.spool: ~
+```
+
+### /etc/metricbeat/modules.d/mysql.yml 
+
+When deploying the sample Spring app mysql is deployed and configured.  In the setup instructions the mysql user and password are specified.  The username is `springuser` and the password is `ThePassword`. The hosts array in the following config file is `hosts: ["springuser:ThePassword@tcp(127.0.0.1:3306)/"]`
+
+```
+- module: mysql
+  #metricsets:
+  #  - status
+  #  - galera_status
+  period: 10s
+
+  # Host DSN should be defined as "user:pass@tcp(127.0.0.1:3306)/"
+  # The username and password can either be set in the DSN or using the username
+  # and password config options. Those specified in the DSN take precedence.
+  #hosts: ["root:secret@tcp(127.0.0.1:3306)/"]
+  hosts: ["springuser:ThePassword@tcp(127.0.0.1:3306)/"]
 ```
