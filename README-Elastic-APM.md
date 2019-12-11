@@ -62,13 +62,38 @@ Open up Kibana Home and then click on Add APM
 Switch to the Java tab
 Copy the APM Server URL and Secret Token.  Specify the Application name yourself:
 ```
-export ELASTIC_APM_SERVER_URL=https://yadayadayada.apm.us-central1.gcp.cloud.es.io:443
+export ELASTIC_APM_SERVER_URLS=https://yadayadayada.apm.us-central1.gcp.cloud.es.io:443
 
 export ELASTIC_APM_SECRET_TOKEN=AbcdefGHIjklabc
 
 export ELASTIC_APM_SERVICE_NAME=Spring-MySQL
-```
 
+export ELASTIC_APM_APP_PACKAGES=com.example
+```
+## Configure the Maven Wrapper
+
+The launcher is at `gs-accessing-data-mysql/complete/mvnw`.  Edit it to include the environment vars that you set in `gs-accessing-data-mysql/complete/environment`.  This is not the complete wrapper file, just the end bit where the command is built up.  You will add the lines for:
+
+ - `-javaagent:./elastic-apm-agent.jar`
+ - `-Delastic.apm.service_name`
+ - `-Delastic.apm.server_url`
+ - `-Delastic.apm.secret_token`
+ - `-Delastic.apm.application_packages`
+
+```
+WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
+  
+exec "$JAVACMD" \
+  -javaagent:./elastic-apm-agent.jar \
+  -Delastic.apm.service_name=${ELASTIC_APM_SERVICE_NAME:-demo-app} \
+  -Delastic.apm.server_urls=${ELASTIC_APM_SERVER_URLS} \
+  -Delastic.apm.secret_token=${ELASTIC_APM_SECRET_TOKEN} \
+  -Delastic.apm.application_packages=${ELASTIC_APM_APP_PACKAGES:-com.example} \
+  $MAVEN_OPTS \
+  -classpath "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" \
+  "-Dmaven.home=${M2_HOME}" "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
+  ${WRAPPER_LAUNCHER} "$@"
+```
 ## Start the application
 ```
 source ./environment 
