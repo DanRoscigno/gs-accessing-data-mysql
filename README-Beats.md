@@ -189,23 +189,42 @@ and the response will be compared to the strings `Saved` and `saved`
   #
   # Replaces:
   # curl localhost:8080/demo/add -d name=First \
-  # -d email=someemail@someemailprovider.com
+  # -d email=dan@example.com
   #
   # Adds: Checking response body for 'Saved'
   #
 
-  name: SpringToDoApp
-  schedule: '@every 5s'
-  urls: ["http://10.0.2.15:8080/demo/add"]
+  name: SpringToDoApp-POST
+  schedule: '@every 60s'
+    urls: ["http://10.0.2.15:8080/demo/add"]
   check.request:
     method: POST
     headers: 
       'Content-Type': 'application/x-www-form-urlencoded'
-    body: "name=dan&email=dan%40example.com"
+    body: "name=first&email=dan%40example.com"
   check.response:
     status: 200
     body:
       - Saved
       - saved
+  response.include_body: 'always'
+
+- type: http
+  #
+  # Replaces:
+  # curl localhost:8080/demo/all
+  #
+  # Adds: Checking response body for 'dan'
+  #
+
+  name: SpringToDoApp-GET
+  schedule: '@every 5s'
+  urls: ["http://10.0.2.15:8080/demo/all"]
+  check.request:
+    method: GET
+  check.response:
+    status: 200
+    body:
+      - example.com
   response.include_body: 'always'
   ```
