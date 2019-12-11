@@ -46,15 +46,15 @@ MariaDB [(none)]> quit
 Bye     
 ```
 
+## Download the APM agent JAR
+```
+curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.10.0/elastic-apm-agent-1.10.0.jar
+```
+
 ## Configure the APM environment vars
 ```
 cd gs-accessing-data-mysql/complete
 vi environment 
-```
-
-## Download the APM agent JAR
-```
-curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.10.0/elastic-apm-agent-1.10.0.jar
 ```
 
 ### The environment vars come directly from the Add APM page in Kibana
