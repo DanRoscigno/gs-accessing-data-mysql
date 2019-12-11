@@ -133,6 +133,8 @@ queue.spool: ~
 
 When deploying the sample Spring app mysql is deployed and configured.  In the setup instructions the mysql user and password are specified.  The username is `springuser` and the password is `ThePassword`. The hosts array in the following config file is `hosts: ["springuser:ThePassword@tcp(127.0.0.1:3306)/"]`
 
+Note: The username and password should not be in the file, the keystore should be used.
+
 ```
 - module: mysql
   #metricsets:
