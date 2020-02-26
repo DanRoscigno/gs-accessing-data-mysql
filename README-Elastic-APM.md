@@ -48,7 +48,7 @@ Bye
 
 ## Download the APM agent JAR
 ```
-curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.10.0/elastic-apm-agent-1.10.0.jar
+curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.13.0/elastic-apm-agent-1.13.0.jar
 ```
 
 ## Configure the APM environment vars
