@@ -1,0 +1,61 @@
+PUT _security/role/beats-setup
+{
+  "cluster": [
+    "monitor",
+    "manage_ml",
+    "manage_ilm"
+  ],
+  "indices": [
+    {
+      "names": [
+        "filebeat-*"
+      ],
+      "privileges": [
+        "manage",
+        "read"
+      ],
+      "field_security": {
+        "grant": [
+          "*"
+        ],
+        "except": []
+      },
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "metricbeat-*"
+      ],
+      "privileges": [
+        "manage"
+      ],
+      "field_security": {
+        "grant": [
+          "*"
+        ],
+        "except": []
+      },
+      "allow_restricted_indices": false
+    },
+    {
+      "names": [
+        "heartbeat-*"
+      ],
+      "privileges": [
+        "manage"
+      ],
+      "field_security": {
+        "grant": [
+          "*"
+        ]
+      },
+      "allow_restricted_indices": false
+    }
+  ],
+  "applications": [],
+  "run_as": [],
+  "metadata": {},
+  "transient_metadata": {
+    "enabled": true
+  }
+}
