@@ -16,7 +16,7 @@ For 7.5 things change slightly, I am working on it.
 Install by following the instructions in Kibana Home and then enable the relevant modules:
 
 ```
-sudo filebeat modules enable apache auditd mysql system
+sudo filebeat modules enable auditd mysql system
 ```
 
 Setup the Filebeat keystore
