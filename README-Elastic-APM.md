@@ -47,8 +47,9 @@ Bye
 ```
 
 ## Download the APM agent JAR
+Check to see what the current version is, there is a link in the Kibana Home > Add APM instructions.
 ```
-curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.13.0/elastic-apm-agent-1.13.0.jar
+curl -Lo elastic-apm-agent.jar https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.15.0/elastic-apm-agent-1.15.0.jar
 ```
 
 ## Configure the APM environment vars
